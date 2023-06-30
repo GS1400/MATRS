@@ -33,7 +33,7 @@
 %  .qf         %   (ftarget-f)/(finit-f)
 %  .initTime   %   inital cputime
 %  .done       %   done with the search?
-%  .acc        %   stop when qf<=acc
+%  .accf       %   stop when qf<=accf
 %  .secmax     %   stop if sec>=secmax 
 %  .nfmax      %   stop if nf>=nfmax 
 %  .finit      %   the initial f
@@ -132,7 +132,7 @@ if isfield(st,'ftarget'), info.ftarget=st.ftarget;
 else, info.ftarget=0;
 end;
 if isfield(st,'accf'), info.accf=st.accf;
-else, info.acc=1e-4;
+else, info.accf=1e-4;
 end;
 % noise level
 if isfield(st,'level'), level=st.level;
