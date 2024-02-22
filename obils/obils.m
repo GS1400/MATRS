@@ -36,47 +36,26 @@
 % Last revision: November 2018
 
 function x = obils(B,y,l,u,cp)
-
-
-
 % Check the input arguments
-if nargin > 5
-    error('Too many input arguments');
-end
-
-if nargin < 4
-    error('Not enought input arguments');
-end
-
-if nargin == 4 
-   cp = 0;
-end
-
+if nargin > 5, error('Too many input arguments');end
+if nargin < 4, error('Not enought input arguments');end
+if nargin == 4, cp = 0; end
 [m,n] = size(B);
-
 if m ~= size(y,1) || size(y,2) ~= 1 || ...
-      n ~= size(l,1) || size(l,2) ~= 1 || ...
-      n ~= size(u,1) || size(u,2) ~= 1     % Input error
+    n ~= size(l,1) || size(l,2) ~= 1 || ...
+    n ~= size(u,1) || size(u,2) ~= 1     % Input error
     error('Input arguments have a matrix dimension error!')
 end
-
 if rank(B) < n
     error('Matrix does not have full column rank, use ubils')
 end
-
 l = ceil(l); u = floor(u);  % To make it work with real bounds
 for i = 1 : n
-    if l(i) >= u(i)
-        error('Invalid upper bound or lower bound');
-    end
+    if l(i) >= u(i), error('Invalid upper bound or lower bound');end
 end
-
 if cp == 0
     % Reduction with no column permutations
-    U = qr([B,y]);
-    R = triu(U(1:n,1:n)); 
-    y = U(1:n,n+1);
-    
+    U = qr([B,y]); R = triu(U(1:n,1:n)); y = U(1:n,n+1);
     % Search
     x = obils_search(R,y,l,u);
 else
@@ -84,14 +63,10 @@ else
     [R,y,l,u,p] = obils_reduction(B,y,l,u);
     % Search
     z = obils_search(R,y,l,u);
-    
     % Reorder z to obtain the optimal solution
     x = zeros(n,1);
-    for i = 1 : n
-        x(p(i)) = z(i);
-    end
+    for i =1:n, x(p(i)) = z(i);end
 end
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

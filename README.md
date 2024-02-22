@@ -12,14 +12,18 @@ serious use of this code.
 
 This directory contains 
 
-* the Matlab source code for Version 1 (April 20, 2023), 
-* a driver program driver.m showing its use, 
+* the Matlab source code for Version 1 (Feb 20, 2024), 
+
+* a stand-alone driver "driver_stand_alone.m" for MATRS 
+
+* a reentrant driver "driver_reentrant.m" for MATRS 
+
 * and the paper
 
 M. Kimiaei and A. Neumaier,
 Heuristic methods for noisy derivative-free bound-constrained 
 mixed-integer optimization. Available at optimization online,
-(2023).
+(2024).
 
 This paper describes the method implemented and some test results. 
 Please cite this paper when using this package in scientific work.
