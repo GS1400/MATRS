@@ -12,7 +12,7 @@ serious use of this code.
 
 This directory contains 
 
-* the Matlab source code for Version 1 (Feb 20, 2024), 
+* the Matlab source code for Version 2 (Feb 20, 2024), 
 
 * a stand-alone driver "driver_stand_alone.m" for MATRS 
 
