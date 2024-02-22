@@ -10,6 +10,9 @@ The program was written by Morteza Kimiaei (University of Vienna).
 Please inform the author at kimiaeim83@univie.ac.at if you make 
 serious use of this code. 
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10692874.svg)](https://doi.org/10.5281/zenodo.10692874)
+
+
 This directory contains 
 
 * the Matlab source code for Version 2 (Feb 20, 2024), 
