@@ -10,7 +10,7 @@ The program was written by Morteza Kimiaei (University of Vienna).
 Please inform the author at kimiaeim83@univie.ac.at if you make 
 serious use of this code. 
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10692874.svg)](https://doi.org/10.5281/zenodo.10692874)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13759724.svg)](https://doi.org/10.5281/zenodo.13759724)
 
 
 This directory contains 
