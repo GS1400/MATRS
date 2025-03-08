@@ -17,6 +17,7 @@
 
 function MA = igeneratorD(xbest,ni,MA,itune,info)
 % possibly change in the set of distribution directions
+soldet=info.soldet;
 pinit = xbest(info.iI)-info.xbest0i(info.iI);
 normpinit = norm(pinit,inf);
 changDi = (normpinit==0);
@@ -28,7 +29,7 @@ if ~changDi
    end
    % call usequence to compute D
    MA.int.D = ...
-     usequence(ni,itune.ilambda,MA.int.kappa*ones(ni,1),MA.int.pinit,0);
+     usequence(ni,itune.ilambda,MA.int.kappa*ones(ni,1),MA.int.pinit,soldet);
    MA.int.s = zeros(ni, 1); MA.int.M = eye(ni);
 else  % use iusequence 
     MA.int.kappa = 1;

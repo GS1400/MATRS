@@ -53,7 +53,13 @@ format long
 %
 % 
 
-solcas=3; pbcas=3; soldet=0; 
+solcas=3; pbcas=3; soldet=1; 
+
+% initialize random number generator
+if soldet 
+   rdet   = readrdet; % assign rdet 
+   rand ("state",rdet);
+end;
 
 %%%%%%%%%%%%%%%%%%%%%%
 % problem definition %
@@ -98,6 +104,8 @@ st.n = n; % problem dimension
 
 st.x = x; % initial point
 
+st.soldet=soldet;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % other information to be % 
 % provided by the user    %
@@ -107,8 +115,7 @@ st.x = x; % initial point
 tune=[]; % default choice
 
 % solver path
-solverPath= ...
-          input('e.g.: /users/kimiaei/MPCsoftware/MATRS-main >> ','s');
+solverPath = '/users/kimiaei/MPCsoftware/MATRS-main';
 
 % path for minq8, used to solve the trust-region subproblem in cMATRS
 eval(['addpath ',solverPath,'/minq8']) 
@@ -117,11 +124,6 @@ eval(['addpath ',solverPath,'/obils'])
 % path for test problems
 eval(['addpath ',solverPath,'/problems'])
 
-% initialize random number generator
-if soldet 
-   rdet   = readrdet; % assign rdet 
-   rand ("state",rdet);
-end;
 if st.prt>0, rng, end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%

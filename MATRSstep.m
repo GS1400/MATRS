@@ -75,6 +75,8 @@ function [x,f,infos]=MATRSstep(x,f,p,indMixInt,low,upp,budget)
 persistent MA state prt itune ctune mitune info ni nc dim 
 
 persistent xbest fbest  xfinal ffinal ordering nfmax secmax initTime
+
+persistent soldet rngState
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% MATRSread of the paper %%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -89,6 +91,7 @@ if nargin==0 % return info
   infos.number_succ_cTRS =MA.cont.succ_cTRS;
   infos.number_succ_iTRS =MA.int.succ_iTRS;
   infos.state=state;
+  rng(rngState);  % ✅ Restore RNG state
   return;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -123,8 +126,13 @@ if nargout==0 % initialize solver environment
   if isfield(budget,'secmax'), secmax=budget.secmax; 
   else, secmax=inf;
   end
+  if isfield(budget,'soldet'), soldet=budget.soldet; 
+  else, soldet=0;
+  end
+  info.soldet=soldet;
   if isfield(budget,'initTime'),initTime=budget.initTime; end
   info.nc=nc; info.ni=ni;  prt=p; infos=info; state='initial'; 
+  rngState = rng;  % ✅ Save RNG state
   return;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -476,7 +484,7 @@ while 1 % main loop
                MA.cont.pinit=pinit;
                MA.cont.pinit=ctune.sc*MA.cont.pinit/normpinit;
                MA.cont.D    =MA.cont.kappa*usequence(nc,...
-                            ctune.clambda,zeros(nc,1),MA.cont.pinit,0);
+                            ctune.clambda,zeros(nc,1),MA.cont.pinit,soldet);
                if MA.cont.kappa<ctune.ckmax
                    MA.cont.kappa=MA.cont.kappa+1;
                else, MA.cont.kappa=1;
